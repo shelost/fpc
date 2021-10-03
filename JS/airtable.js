@@ -86,8 +86,8 @@ function uploadSet(set){
 
     console.log(problems)
     console.log(JSON.parse(problems))
-
     problems = JSON.stringify(JSON.parse(problems))
+    console.log(problems)
 
     setTimeout(()=> {
         if (MATCH == ""){
