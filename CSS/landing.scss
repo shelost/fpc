@@ -1,0 +1,49 @@
+@import 'variables';
+
+#main{
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 80vh;
+}
+
+.title{
+    text-align: center;
+    color: white;
+    margin-bottom: 40px;
+    h1{
+        font-size: 24px;
+        font-weight: 400;
+        margin: 0;
+        margin-bottom: 15px;
+    }
+    h2{
+        font-size: 20px;
+        font-weight: 300;
+        margin: 0;
+        color: rgba(white, 0.7);
+    }
+}
+
+.buttons{
+    display: flex;
+    .button{
+        color: white;
+        border: 1px solid white;
+        text-align: center;
+        width: 200px;
+        height: 80px;
+        margin: 10px;
+        transition: 0.2s ease;
+        h1{
+            font-size: 20px;
+            line-height: 80px;
+            font-weight: 400;
+            margin: 0;
+        }
+        &:hover{
+            opacity: 0.7;
+        }
+    }
+}
