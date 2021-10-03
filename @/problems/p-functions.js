@@ -4,7 +4,7 @@ function buildElem(set){
 
     let string =
     `
-    <div class = 'elem'>
+    <div class = 'elem' id = ${s.id}>
         <div class = 'head'>
             <h1 class = 'name'> ${s.name} </h1>
             <p class = 'id'> ${s.id} </p>
@@ -68,4 +68,10 @@ function drawProblems(){
             p.drawOutput(oCanvas, 7)
         }
     }
+}
+
+function goToProblem(id){
+    sessionStorage.setItem("linkID", id)
+    sessionStorage.setItem("linked", "true")
+    window.location = '../create'
 }

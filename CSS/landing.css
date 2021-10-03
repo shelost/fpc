@@ -1,63 +1,120 @@
-#main {
-  margin-top: 50px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  height: 80vh;
+@media screen and (min-width: 800px) {
+  #main {
+    margin-top: 50px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    height: 80vh;
+  }
+  .title {
+    text-align: center;
+    color: white;
+    margin-bottom: 40px;
+  }
+  .title h1 {
+    font-size: 24px;
+    font-weight: 400;
+    margin: 0;
+    margin-bottom: 15px;
+  }
+  .title h2 {
+    font-size: 20px;
+    font-weight: 300;
+    margin: 0;
+    color: rgba(255, 255, 255, 0.7);
+  }
+  .buttons {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+  .buttons .button {
+    color: white;
+    border: 1px solid white;
+    text-align: center;
+    width: 200px;
+    height: 80px;
+    margin: 10px;
+    -webkit-transition: 0.2s ease;
+    transition: 0.2s ease;
+  }
+  .buttons .button h1 {
+    font-size: 20px;
+    line-height: 80px;
+    font-weight: 400;
+    margin: 0;
+  }
+  .buttons .button:hover {
+    opacity: 0.7;
+  }
 }
 
-.title {
-  text-align: center;
-  color: white;
-  margin-bottom: 40px;
-}
-
-.title h1 {
-  font-size: 24px;
-  font-weight: 400;
-  margin: 0;
-  margin-bottom: 15px;
-}
-
-.title h2 {
-  font-size: 20px;
-  font-weight: 300;
-  margin: 0;
-  color: rgba(255, 255, 255, 0.7);
-}
-
-.buttons {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.buttons .button {
-  color: white;
-  border: 1px solid white;
-  text-align: center;
-  width: 200px;
-  height: 80px;
-  margin: 10px;
-  -webkit-transition: 0.2s ease;
-  transition: 0.2s ease;
-}
-
-.buttons .button h1 {
-  font-size: 20px;
-  line-height: 80px;
-  font-weight: 400;
-  margin: 0;
-}
-
-.buttons .button:hover {
-  opacity: 0.7;
+@media screen and (max-width: 800px) {
+  #main {
+    margin-top: 50px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    height: 80vh;
+  }
+  .title {
+    text-align: center;
+    color: white;
+    margin-bottom: 40px;
+  }
+  .title h1 {
+    font-size: 24px;
+    font-weight: 400;
+    margin: 0;
+    margin-bottom: 15px;
+  }
+  .title h2 {
+    font-size: 20px;
+    font-weight: 300;
+    margin: 0;
+    color: rgba(255, 255, 255, 0.7);
+  }
+  .buttons {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .buttons .button {
+    color: white;
+    border: 1px solid white;
+    text-align: center;
+    width: 80vw;
+    height: 20vw;
+    margin: 10px;
+    -webkit-transition: 0.2s ease;
+    transition: 0.2s ease;
+  }
+  .buttons .button h1 {
+    font-size: 20px;
+    line-height: 80px;
+    font-weight: 400;
+    margin: 0;
+  }
+  .buttons .button:hover {
+    opacity: 0.7;
+  }
 }
 /*# sourceMappingURL=landing.css.map */

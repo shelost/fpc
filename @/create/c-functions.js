@@ -242,6 +242,20 @@ function onclick(e){
     }
 }
 
+function processProblems(){
+    Strings = localStorage.getItem("Results2").split('!,')
+    Jsons = []
+
+    for (let i=0; i<Strings.length; i++){
+        if (i == Strings.length-1 ){
+            Strings[i] = Strings[i].substring(0, Strings[i].length-1)
+        }
+        Strings[i] = JSON.parse(Strings[i])
+        Strings[i].problems = JSON.parse(Strings[i].problems)
+        Jsons.push(Strings[i])
+    }
+}
+
 // Event Listeners
 window.addEventListener('mousemove', mousemove)
 window.addEventListener('click', onclick)

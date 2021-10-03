@@ -10,35 +10,27 @@ let Strings = localStorage.getItem("Results2").split('!,')
 let Jsons = []
 processProblems()
 
-function processProblems(){
-    Strings = localStorage.getItem("Results2").split('!,')
-    Jsons = []
-
-    for (let i=0; i<Strings.length; i++){
-        if (i == Strings.length-1 ){
-            Strings[i] = Strings[i].substring(0, Strings[i].length-1)
-        }
-        Strings[i] = JSON.parse(Strings[i])
-        Strings[i].problems = JSON.parse(Strings[i].problems)
-        Jsons.push(Strings[i])
-    }
+// Check if linked from @/Problems
+if (sessionStorage.getItem("linkID") != null && sessionStorage.getItem("linked") == "true"){
+    findMatch(sessionStorage.getItem("linkID"))
+    Id('search-input').value = sessionStorage.getItem("linkID")
+    sessionStorage.setItem("linked", "false")
 }
 
-// Retrive & draw ID
+///// Interaction
 
+// Retrive & draw ID
 Id('search-button').onclick = () => {
     findMatch(Id('search-input').value)
     Id('search-input').value = ""
 }
-
+// Select shelf to draw onto
 for (let i=0; i<Class('row').length; i++){
     let elem = Class('row')[i]
-
     elem.onclick = () => {
         Select(i)
     }
 }
-
 // Color Selector
 for (let i=0; i<Class('color').length; i++){
 
@@ -125,11 +117,6 @@ const CreateLoop = () => {
             Id('submit-text').innerHTML = 'Next'
             Id('submit').classList.remove('purple')
             Id('submit').classList.add('blue')
-            /*
-            Id('stage').classList.remove('purple')
-            Id('stage').classList.add('blue')
-            Id('stage').innerHTML = "Problem"
-            */
             Id('numStrokes').classList.add('active')
             Id('numLines').classList.remove('active')
             break
@@ -137,11 +124,6 @@ const CreateLoop = () => {
             Id('submit-text').innerHTML = 'Submit'
             Id('submit').classList.add('purple')
             Id('submit').classList.remove('blue')
-            /*
-            Id('stage').classList.add('purple')
-            Id('stage').classList.remove('blue')
-            Id('stage').innerHTML = "Solution"
-            */
             Id('numStrokes').classList.remove('active')
             Id('numLines').classList.add('active')
             break
@@ -169,7 +151,6 @@ const CreateLoop = () => {
         }
     }else{
         if (DRAWING){
-
             let w = Lines[Lines.length-1].start
             ctx.beginPath()
             ctx.strokeStyle = Palette[COLOR].hex
@@ -177,24 +158,11 @@ const CreateLoop = () => {
             ctx.lineTo(EX, EY)
             ctx.stroke()
             ctx.closePath()
-
             r = 8
         }else{
             r = 5
         }
     }
-
     window.requestAnimationFrame(CreateLoop)
 }
 window.requestAnimationFrame(CreateLoop)
-
-
-function dataURItoBlob(dataURI) {
-    var binary = atob(dataURI.split(',')[1]);
-    var array = [];
-    for(var i = 0; i < binary.length; i++) {
-        array.push(binary.charCodeAt(i));
-    }
-    return new Blob([new Uint8Array(array)], {type: 'image/png'});
-}
-

@@ -124,6 +124,7 @@
     padding: 7px;
     display: block;
     background-color: white;
+    cursor: pointer;
     -webkit-transition: 0.2s ease;
     transition: 0.2s ease;
   }

@@ -57,6 +57,15 @@ for (let i=0; i<Class('image').length; i++){
     c.height = S
 }
 
+for (let i=0; i<Class('elem').length; i++){
+    let elem = Class('elem')[i]
+    let id = elem.id
+
+    elem.onclick = () => {
+        goToProblem(id)
+    }
+}
+
 const ProblemsLoop = () => {
 
     // Control Toggles
