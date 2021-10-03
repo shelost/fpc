@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> FPC </title>
+    <link rel="icon" type="image/png" sizes="32x32" href="../../Assets/ellis-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="../../Assets/ellis-16.png" />
+    <link href = '../../CSS/style.css' rel = 'stylesheet'>
+    <link href = 'create.css' rel = 'stylesheet'>
+</head>
+<body>
+
+    <div id = 'header'>
+
+        <h1 id = 'mast'> FPC </h1>
+
+        <div class = 'menu'>
+            <h2> Kevin Ellis, Heewon Ahn </h2>
+        </div>
+
+    </div>
+
+    <div id = 'dashboard'>
+        <div class = 'flex dashboard'>
+            <div class = 'flex'>
+                <h1 id = 'id'> #000000 </h1>
+                <h2 class = 'button yellow' id = 'create' onclick = 'Create()'> New </h2>
+            </div>
+            <div class = 'input-box'>
+                <p class = 'input-label'> Name </p>
+                <input id = 'name' placeholder = 'Name' class = 'input'>
+            </div>
+            <!--
+            <div class = 'input-box'>
+                <p class = 'input-label'> Difficulty </p>
+                <input id = 'difficulty' placeholder = '0-9' class = 'input' type = 'number' min = '0' max = '9'>
+            </div>
+            -->
+        </div>
+        <div class = 'flex search'>
+            <input id = 'search-input' placeholder = 'Enter ID...'>
+            <h2 class = 'button blue' id = 'search-button'> Search </h2>
+        </div>
+    </div>
+
+
+    <div id = 'main'>
+
+        <!--
+        <div id = 'examples' class = 'section shelf'>
+            <div class = 'section-header'>
+                <h1> Problems </h1>
+            </div>
+            <div class = 'row selected'>
+                <div id = 'a-input-1' class = 'image example input selected'></div>
+                <div id = 'a-output-1' class = 'image example output'></div>
+            </div>
+            <div class = 'row'>
+                <div id = 'a-input-2' class = 'image example input'></div>
+                <div id = 'a-output-2' class = 'image example output'></div>
+            </div>
+            <div class = 'row'>
+                <div id = 'a-input-3' class = 'image example input'></div>
+                <div id = 'a-output-3' class = 'image example output'></div>
+            </div>
+        </div>
+        -->
+
+        <!--
+        <div id = 'problems' class = 'section'>
+            <div class = 'section-header'>
+                <h1> Examples </h1>
+            </div>
+            <div id = 'problem' class = 'image'>
+            </div>
+        </div>
+        -->
+
+        <div id = 'examples' class = 'section shelf'>
+            <div class = 'section-header'>
+                <h1> Problem </h1>
+                <div class = 'menu'>
+                    <div class = 'button green' id = 'upload' onclick = "Upload()">
+                        <p> Upload </p>
+                    </div>
+                </div>
+            </div>
+            <div class = 'flex columns'>
+                <div class = 'rows'>
+                    <div class = 'row selected'>
+                        <canvas id = 'a-input-1' class = 'image example input'></canvas>
+                        <canvas id = 'a-output-1' class = 'image example output'></canvas>
+                    </div>
+                    <div class = 'row'>
+                        <canvas id = 'a-input-2' class = 'image example input'></canvas>
+                        <canvas id = 'a-output-2' class = 'image example output'></canvas>
+                    </div>
+                    <div class = 'row'>
+                        <canvas id = 'a-input-3' class = 'image example input'></canvas>
+                        <canvas id = 'a-output-3' class = 'image example output'></canvas>
+                    </div>
+                </div>
+                <div class = 'rows'>
+                    <div class = 'row'>
+                        <canvas id = 'a-input-4' class = 'image example input selected'></canvas>
+                        <canvas id = 'a-output-4' class = 'image example output'></canvas>
+                    </div>
+                    <div class = 'row'>
+                        <canvas id = 'a-input-5' class = 'image example input'></canvas>
+                        <canvas id = 'a-output-5' class = 'image example output'></canvas>
+                    </div>
+                    <div class = 'row'>
+                        <canvas id = 'a-input-6' class = 'image example input'></canvas>
+                        <canvas id = 'a-output-6' class = 'image example output'></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class = 'section-footer'>
+            </div>
+        </div>
+
+        <div id = 'draw' class = 'section'>
+            <div class = 'section-header'>
+                <div class = 'flex'>
+                    <h1> Draw </h1>
+                   <!-- <h2 id = 'stage' class = 'blue'> Problem </h2>-->
+                   <h2 id = 'numStrokes' class = 'blue'> 0 </h2>
+                   <h2 id = 'numLines' class = 'purple'> 0 </h2>
+                </div>
+                <div class = 'menu'>
+                    <div class = 'button gray' id = 'prev' onclick = "Back()">
+                        <p> Back </p>
+                    </div>
+                    <div class = 'button purple' id = 'submit' onclick = "Submit()">
+                        <p id = 'submit-text'> Submit </p>
+                    </div>
+                </div>
+            </div>
+            <div class = 'flex'>
+                <canvas id = 'canvas'>
+                </canvas>
+                <div id = 'draw-controls'>
+                    <div id = 'palette'>
+                        <div class = 'color red selected' id = 'c-red'></div>
+                        <div class = 'color orange' id = 'c-orange'></div>
+                        <div class = 'color yellow' id = 'c-yellow'></div>
+                        <div class = 'color green' id = 'c-green'></div>
+                        <div class = 'color cyan' id = 'c-cyan'></div>
+                        <div class = 'color blue' id = 'c-blue'></div>
+                        <div class = 'color indigo' id = 'c-indigo'></div>
+                        <div class = 'color purple' id = 'c-purple'></div>
+                        <div class = 'color pink' id = 'c-pink'></div>
+                    </div>
+                    <div id = 'undo-controls'>
+                        <div class = 'button red' id = 'clear' onclick = "Clear()">
+                            <p> C </p>
+                        </div>
+                        <div class = 'button blue' id = 'clear' onclick = "Undo()">
+                            <p> ↵ </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h1 id = 'message'> Hello </h1>
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@1.8.4/Sortable.min.js"></script>
+<script src="../../JS/airtable.browser.js"></script>
+<script src="../../JS/airtable.js"></script>
+<script src="../../JS/functions.js"></script>
+<script src="c-functions.js"></script>
+<script src="c-script.js"></script>
+</html>

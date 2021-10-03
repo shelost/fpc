@@ -1,0 +1,434 @@
+@import '../../CSS/variables';
+
+@media screen and (min-width: 800px){
+
+    #main{
+        display: flex;
+        margin-top: 20px;
+        align-items: flex-start;
+    }
+
+    #canvas{
+        width: 35vw;
+        height: 35vw;
+        margin: 1vw;
+        background: black;
+        cursor: none;
+    }
+
+    #problem{
+        width: 25vw;
+        height: 25vw;
+        background: black;
+        margin: 15px;
+    }
+
+    #dashboard{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 55px;
+        background: black;
+        border: 1px solid rgba(white, 0.3);
+        padding: 0;
+        padding-left: 15px;
+        padding-right: 15px;
+        input{
+            font-size: 15px;
+            padding: 8px;
+            outline: none;
+            border: none;
+            background: rgba(white, 0.8);
+            transition: 0.2s ease;
+            width: 100%;
+            &:hover{
+                background: rgba(white, 0.9);
+            }
+        }
+        #id{
+            color: white;
+            font-size: 16px;
+            font-weight: 300;
+            background: rgba(white, 0.2);
+            padding: 10px;
+        }
+        #create{
+            font-size: 16px;
+            font-weight: 400;
+            padding: 10px;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+        .input-box{
+            display: flex;
+            align-items: center;
+            margin-left: 15px;
+            p{
+                font-size: 15px;
+                color: white;
+                font-weight: 300;
+                margin: 10px;
+            }
+        }
+        .search{
+            .button{
+                font-size: 16px;
+                font-weight: 400;
+                padding: 10px;
+                margin-left: 10px;
+                cursor: pointer;
+            }
+        }
+    }
+
+    #message{
+        position: fixed;
+        width: 30vw;
+        height: 5vw;
+        bottom: 50px;
+        left: 35vw;
+        background: rgba(white, 0.8);
+        opacity: 0;
+        transition: 0.2s ease;
+        font-size: 28px;
+        font-weight: 600;
+        margin: 0;
+        line-height: 5vw;
+        text-align: center;
+        &.active{
+            opacity: 0.6;
+        }
+    }
+
+    .section{
+        background: #444444;
+        margin: 10px;
+        .section-header{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #333333;
+            height: 50px;
+            h1{
+                color: white;
+                font-size: 16px;
+                font-weight: 300;
+                margin: 5px;
+                margin-right: 0;
+                padding: 10px;
+            }
+            h2{
+                color: rgba(white, 0.7);
+                font-size: 14px;
+                font-weight: 300;
+                margin: 0;
+                margin-left: 10px;
+                padding: 5px;
+                padding-left: 10px;
+                padding-right: 10px;
+                opacity: 0.7;
+                &.active{
+                    opacity: 1;
+                }
+            }
+        }
+        .menu{
+            display: flex;
+            .button{
+                height: 20px;
+                padding: 5px;
+                padding-left: 10px;
+                padding-right: 10px;
+                margin-right: 10px;
+                cursor: pointer;
+                p{
+                    margin: 0;
+                    font-size: 14px;
+                    font-weight: 500;
+                }
+            }
+        }
+    }
+
+    #draw-controls{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        height: 35vw;
+        padding-right: 1vw;
+        #palette{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1vw;
+            padding-bottom: 0;
+            background: rgba(black, 0.4);
+            .color{
+                width: 1.5vw;
+                height: 1.5vw;
+                border-radius: 20px;
+                margin-bottom: 1vw;
+                cursor: pointer;
+                &.selected{
+                    transform: scale(1.2);
+                    border: 1px solid white;
+                }
+            }
+        }
+        #undo-controls{
+            padding: 1vw;
+            padding-top: 0;
+            background: rgba(black, 0.4);
+            .button{
+                width: 2vw;
+                height: 2vw;
+                font-size: 1.2vw;
+                line-height: 2vw;
+                text-align: center;
+                cursor: pointer;
+            }
+        }
+    }
+
+    .rows{
+        .row{
+            display: flex;
+            padding: 0.5vw;
+            .image{
+                background-color: black;
+                background-size: cover;
+                background-position: center;
+                width: 10vw;
+                height: 10vw;
+                margin: 0.3vw;
+            }
+            &.selected{
+                background: rgba($yellow, 0.3);
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 800px){
+
+    #main{
+        display: flex;
+        flex-direction: column-reverse;
+        margin-top: 20px;
+        align-items: center;
+    }
+
+    #canvas{
+        width: 80vw;
+        height: 80vw;
+        margin: 2vw;
+        background: black;
+        cursor: none;
+    }
+
+    #problem{
+        width: 25vw;
+        height: 25vw;
+        background: black;
+        margin: 15px;
+    }
+
+    #dashboard{
+        align-items: flex-start;
+        justify-content: space-between;
+        background: black;
+        border: 1px solid rgba(white, 0.3);
+        padding: 0;
+        padding-left: 15px;
+        padding-right: 15px;
+        .flex{
+            justify-content: left;
+            margin: 0;
+        }
+        .dashboard{
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+        }
+        input{
+            font-size: 15px;
+            width: 100%;
+            padding: 8px;
+            outline: none;
+            border: none;
+            background: rgba(white, 0.8);
+            transition: 0.2s ease;
+            &:hover{
+                background: rgba(white, 0.9);
+            }
+        }
+        #id{
+            color: white;
+            font-size: 16px;
+            font-weight: 300;
+            background: rgba(white, 0.2);
+            padding: 10px;
+        }
+        #create{
+            font-size: 16px;
+            font-weight: 400;
+            padding: 10px;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+        .input-box{
+            display: flex;
+            align-items: center;
+            width: 100%;
+            p{
+                font-size: 15px;
+                color: white;
+                font-weight: 300;
+                margin: 10px;
+                margin-left: 5px;
+            }
+        }
+        .search{
+            .button{
+                font-size: 16px;
+                font-weight: 400;
+                padding: 10px;
+                margin-left: 10px;
+                cursor: pointer;
+            }
+        }
+    }
+
+    #message{
+        position: fixed;
+        width: 30vw;
+        height: 5vw;
+        bottom: 50px;
+        left: 35vw;
+        background: rgba(white, 0.8);
+        opacity: 0;
+        transition: 0.2s ease;
+        font-size: 28px;
+        font-weight: 600;
+        margin: 0;
+        line-height: 5vw;
+        text-align: center;
+        &.active{
+            opacity: 0.6;
+        }
+    }
+
+    .section{
+        background: #444444;
+        margin: 10px;
+        .section-header{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #333333;
+            height: 50px;
+            h1{
+                color: white;
+                font-size: 16px;
+                font-weight: 300;
+                margin: 5px;
+                margin-right: 0;
+                padding: 10px;
+            }
+            h2{
+                color: rgba(white, 0.7);
+                font-size: 14px;
+                font-weight: 300;
+                margin: 0;
+                margin-left: 10px;
+                padding: 5px;
+                padding-left: 10px;
+                padding-right: 10px;
+                opacity: 0.7;
+                &.active{
+                    opacity: 1;
+                }
+            }
+        }
+        .menu{
+            display: flex;
+            .button{
+                height: 20px;
+                padding: 5px;
+                padding-left: 10px;
+                padding-right: 10px;
+                margin-right: 10px;
+                cursor: pointer;
+                p{
+                    margin: 0;
+                    font-size: 14px;
+                    font-weight: 500;
+                }
+            }
+        }
+    }
+
+    #draw-controls{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        height: 80vw;
+        padding-right: 1vw;
+        #palette{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2vw;
+            padding-bottom: 0;
+            background: rgba(black, 0.4);
+            .color{
+                width: 4vw;
+                height: 4vw;
+                border-radius: 20px;
+                margin-bottom: 2.5vw;
+                cursor: pointer;
+                &.selected{
+                    transform: scale(1.2);
+                    border: 1px solid white;
+                }
+            }
+        }
+        #undo-controls{
+            padding: 2vw;
+            padding-top: 0;
+            background: rgba(black, 0.4);
+            .button{
+                width: 4.5vw;
+                height: 4.5vw;
+                font-size: 3vw;
+                line-height: 4.5vw;
+                text-align: center;
+                cursor: pointer;
+            }
+        }
+    }
+    .columns{
+        display: block;
+        .rows{
+            display: flex;
+            .row{
+                display: flex;
+                padding: 0.5vw;
+                .image{
+                    background-color: black;
+                    background-size: cover;
+                    background-position: center;
+                    width: 14vw;
+                    height: 14vw;
+                    margin: 0.5vw;
+                }
+                &.selected{
+                    background: rgba($yellow, 0.3);
+                }
+            }
+        }
+    }
+}
+

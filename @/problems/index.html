@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> FPC </title>
+    <link rel="icon" type="image/png" sizes="32x32" href="../../Assets/ellis-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="../../Assets/ellis-16.png" />
+    <link href = '../../CSS/style.css' rel = 'stylesheet'>
+</head>
+<body>
+
+    <div id = 'header'>
+
+        <h1 id = 'mast'> FPC </h1>
+
+        <div class = 'menu'>
+            <h2> Kevin Ellis, Heewon Ahn </h2>
+        </div>
+
+    </div>
+
+    <div id = 'controls'>
+        <div id = 'search-box' class = 'flex  control-box'>
+            <!--
+            <input id = 'search' placeholder = 'Search...'>
+            -->
+            <h2 id = 'num-results'> 24 Results </h2>
+
+        </div>
+
+        <div class = 'slide-box flex control-box'>
+            <p> Image Size </p>
+            <input type = 'range' min="50" max="200" value = "100" class = 'slider' id = 'image-size'>
+            <p class = 'slide-value' id = 'image-size-value'> Hello </p>
+        </div>
+
+        <div id = 'option-box' class = 'flex control-box'>
+            <div class = 'check-box flex'>
+                <div class = 'checkbox selected' id = 'check-output' value='show_3'></div>
+                <h2> Output </h2>
+            </div>
+            <div class = 'check-box flex'>
+                <div class = 'checkbox selected' id = 'check-3ex'></div>
+                <h2> 3 Examples </h2>
+            </div>
+            <div class = 'check-box flex'>
+                <div class = 'checkbox selected' id = 'check-name'></div>
+                <h2> Name </h2>
+            </div>
+        </div>
+    </div>
+
+    <div id = 'main'>
+
+    </div>
+
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@1.8.4/Sortable.min.js"></script>
+<script src="../../JS/airtable.browser.js"></script>
+<script src="../../JS/airtable.js"></script>
+<script src="../../JS/functions.js"></script>
+<script src="p-functions.js"></script>
+<script src="p-script.js"></script>
+</html>
