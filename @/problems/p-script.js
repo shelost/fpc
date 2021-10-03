@@ -1,6 +1,6 @@
 const Main = Id('main')
 const Controls = Id('controls')
-
+const S = 500
 var SHOW_3 = true
 var SHOW_OUTPUT = true
 var SHOW_NAME = true
@@ -25,50 +25,39 @@ window.onload = () => {
     },1000)
 }
 
-// Show Problems
-
-fetchProblems(24)
-
-let Problems = []
-
-let strArray = localStorage.getItem("Results").split('!,')
-
-for (let i=0; i<strArray.length; i++){
-    if (i == strArray.length-1 ){
-        strArray[i] = strArray[i].substring(0, strArray[i].length-1)
-    }
-    Problems.push(JSON.parse(strArray[i]))
-}
+// Retrieve, process, and build sets
+fetchProblems2(100)
+let Strings = localStorage.getItem("Results2").split('!,')
+let Jsons = []
+processProblems()
+showResults()
+setTimeout(()=>{
+    drawProblems()
+}, 400)
 
 // Interaction
-
 for (let i=0; i<Class('checkbox').length; i++){
     let cb = Class('checkbox')[i]
-
     cb.onclick = () => {
         cb.classList.toggle('selected')
     }
 }
 
-showResults()
-
 // Sortable
-
 var sortable = Sortable.create(Main,{
     animation: 150,
     dragoverBubble: true,
     disabled: false
 });
 
+// Set canvas size
+for (let i=0; i<Class('image').length; i++){
+    let c = Class('image')[i]
+    c.width = S
+    c.height = S
+}
 
-/*
-var sortable = Sortable.create(Controls,{
-    animation: 150,
-    dragoverBubble: true,
-});
-*/
-
-const loop = () => {
+const ProblemsLoop = () => {
 
     // Control Toggles
     if (Id('check-output').classList.contains('selected'))
@@ -89,32 +78,27 @@ const loop = () => {
         if (SHOW_OUTPUT){ el.classList.remove('hidden')}
         else{el.classList.add('hidden')}
     }
-    for (let i=0; i<Class('name').length; i++){
-        let el = Class('name')[i]
+    for (let i=0; i<Class('head').length; i++){
+        let el = Class('head')[i]
         if (SHOW_NAME){ el.classList.remove('hidden')}
         else{el.classList.add('hidden')}
     }
 
     // Slider
-
     for (let i=0; i<Class('image').length; i++){
         let el = Class('image')[i]
-
         el.style.width = SLIDER.value + "px"
         el.style.height = SLIDER.value + "px"
         el.style.margin = SLIDER.value/50 + "px"
     }
-
     Id('image-size-value').innerHTML = SLIDER.value
-
     if (window.innerWidth > 800){
         sortable.option("disabled", false)
     }else{
         sortable.option("disabled", true)
     }
-
-    window.requestAnimationFrame(loop)
+    window.requestAnimationFrame(ProblemsLoop)
 }
 setTimeout(()=>{
-    window.requestAnimationFrame(loop)
-}, 400)
+    window.requestAnimationFrame(ProblemsLoop)
+}, 200)

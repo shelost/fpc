@@ -40,38 +40,6 @@ function findMatch(id){
     }
 }
 
-// buildSet(): takes in JSON & builds new Set() object
-function buildSet(json){
-
-    let set = new Set(json.id, json.name)
-
-    for (let i=0; i<json.problems.length; i++){
-        let p = json.problems[i]
-        let prob = new Problem([], [])
-
-        for (let j=0; j<p.strokes.length; j++){
-            let s = p.strokes[j]
-            let stroke = new Stroke(s.c)
-            for (let k=0; k<s.points.length; k++){
-                let p = s.points[k]
-                let point = new Point(p.x, p.y, p.c)
-                stroke.points.push(point)
-            }
-            prob.strokes.push(stroke)
-        }
-
-        for (let j=0; j<p.lines.length; j++){
-            let l = p.lines[j]
-            let start = new Point(l.start.x, l.start.y, l.start.c)
-            let end = new Point(l.end.x, l.end.y, l.end.c)
-            let line = new Line(start, end, l.c)
-            prob.lines.push(line)
-        }
-        set.problems.push(prob)
-    }
-    return set
-}
-
 // setProblems(): draws problems in set onto shelf
 function setProblems(set){
     for (let i=0; i<set.problems.length; i++){
@@ -80,7 +48,7 @@ function setProblems(set){
     }
 }
 
-// drawProblems(): draws problem onto given canvas
+// drawProblem(): draws problem onto given canvas
 function drawProblem(problem, index){
     if (Id(`a-input-${index+1}`) != undefined){
         let iCanvas = Id(`a-input-${index+1}`)
@@ -152,6 +120,10 @@ function Submit(){
                     index = i
                     break
                 }
+            }
+
+            if (Lines[Lines.length-1].end == null){
+                Lines.pop()
             }
 
             let p = new Problem(Strokes, Lines)
@@ -250,7 +222,7 @@ function draw(){
             Strokes.push(new Stroke(COLOR))
         }
         MOUSEDOWN = true
-        Strokes[Strokes.length-1].points.push(new Point(EX, EY, COLOR))
+        Strokes[Strokes.length-1].points.push(new Point(Math.round(EX), Math.round(EY), COLOR))
     }
 }
 
@@ -260,11 +232,11 @@ function onclick(e){
         if (DRAWING){
             // set end point
             let l = Lines[Lines.length-1]
-            l.end = new Point(EX, EY, COLOR)
+            l.end = new Point(Math.round(EX), Math.round(EY), COLOR)
 
         }else{
             // Start new line
-            let l = new Line(new Point(EX, EY, COLOR), null, COLOR)
+            let l = new Line(new Point(Math.round(EX), Math.round(EY), COLOR), null, COLOR)
             Lines.push(l)
         }
     }
@@ -283,8 +255,11 @@ window.addEventListener('keyup', (e) => {
         case 'c':
             Clear()
             break
-        case 's':
+        case 'ArrowRight':
             Submit()
+            break
+        case 'ArrowLeft':
+            Back()
             break
         case "Escape":
             if (DRAWING){

@@ -84,6 +84,11 @@ function uploadSet(set){
     }
     problems += "]"
 
+    console.log(problems)
+    console.log(JSON.parse(problems))
+
+    problems = JSON.stringify(JSON.parse(problems))
+
     setTimeout(()=> {
         if (MATCH == ""){
             let obj =
