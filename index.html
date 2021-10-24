@@ -7,6 +7,9 @@
     <title> FPC </title>
     <link rel="icon" type="image/png" sizes="32x32" href="Assets/ellis-32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="Assets/ellis-16.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,900&display=swap" rel="stylesheet">
     <link href = 'CSS/style.css' rel = 'stylesheet'>
     <link href = 'CSS/landing.css' rel = 'stylesheet'>
 
@@ -20,7 +23,7 @@
             <h2> Kevin Ellis, Heewon Ahn </h2>
         </div>
     </div>
-        -->
+    -->
 
     <div id = 'main'>
 
@@ -29,13 +32,20 @@
             <h2> Kevin Ellis, Heewon Ahn </h2>
         </div>
 
+        <div class = 'flex image'>
+            <canvas id = 'input'>
+            </canvas>
+            <canvas id = 'output'>
+            </canvas>
+        </div>
+
         <div class = 'flex buttons'>
-            <a href = '@/problems'>
+            <a href = '@/view'>
                 <div class = 'button'>
                     <h1> View </h1>
                 </div>
             </a>
-            <a href = '@/create'>
+            <a href = '@/svg'>
                 <div class = 'button'>
                     <h1> Create </h1>
                 </div>
@@ -49,4 +59,6 @@
 <script src="JS/airtable.browser.js"></script>
 <script src="JS/airtable.js"></script>
 <script src="JS/functions.js"></script>
+<script src="@/svg/s-functions.js"></script>
+<script src="JS/landing.js"></script>
 </html>

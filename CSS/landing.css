@@ -11,6 +11,9 @@
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
     height: 80vh;
   }
   .title {
@@ -19,36 +22,47 @@
     margin-bottom: 40px;
   }
   .title h1 {
-    font-size: 24px;
-    font-weight: 400;
-    margin: 0;
-    margin-bottom: 15px;
-  }
-  .title h2 {
     font-size: 20px;
     font-weight: 300;
     margin: 0;
-    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 10px;
+  }
+  .title h2 {
+    font-size: 18px;
+    font-weight: 300;
+    margin: 0;
+    color: rgba(255, 255, 255, 0.5);
+  }
+  canvas {
+    width: 300px;
+    height: 300px;
+    margin: 0px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background-color: black;
+  }
+  #input {
+    display: none;
   }
   .buttons {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
+    margin-top: 30px;
   }
   .buttons .button {
     color: white;
-    border: 1px solid white;
+    border: 1px solid rgba(255, 255, 255, 0.7);
     text-align: center;
     width: 200px;
-    height: 80px;
+    height: 60px;
     margin: 10px;
     -webkit-transition: 0.2s ease;
     transition: 0.2s ease;
   }
   .buttons .button h1 {
-    font-size: 20px;
-    line-height: 80px;
-    font-weight: 400;
+    font-size: 18px;
+    line-height: 60px;
+    font-weight: 300;
     margin: 0;
   }
   .buttons .button:hover {

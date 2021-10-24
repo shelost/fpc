@@ -37,7 +37,28 @@ function Classes(elem, arg){
     }
 }
 
-// buildSet(): takes in JSON & builds new Set() object
+function parse(arg){
+    return JSON.parse(arg)
+}
+
+function random(arg){
+    return Math.random()*arg
+}
+
+function floor(arg){
+    return Math.floor(arg)
+}
+
+function string(arg){
+    return JSON.stringify(arg)
+}
+
+function round(arg){
+    return Math.round(arg)
+}
+
+const S = 1000
+
 function buildSet(json){
 
     let set = new Set(json.id, json.name)
