@@ -192,21 +192,25 @@
         }
     }
 
-    .rows{
-        .row{
-            display: flex;
-            padding: 0.5vw;
-            .image{
-                background-color: black;
-                background-size: cover;
-                background-position: center;
-                width: 10vw;
-                height: 10vw;
-                margin: 0.3vw;
-            }
-            &.selected{
-                background: rgba($yellow, 0.3);
-            }
+    #shelf{
+        flex-direction: column;
+        flex-wrap: wrap;
+        height: 35vw;
+        width: 45vw;
+    }
+    .row{
+        display: flex;
+        padding: 0.5vw;
+        .image{
+            background-color: black;
+            background-size: cover;
+            background-position: center;
+            width: 10vw;
+            height: 10vw;
+            margin: 0.3vw;
+        }
+        &.selected{
+            background: rgba($yellow, 0.3);
         }
     }
 }

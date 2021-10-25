@@ -1,6 +1,5 @@
 const Main = Id('main')
 const Controls = Id('controls')
-const S = 500
 var SHOW_3 = true
 var SHOW_OUTPUT = true
 var SHOW_NAME = true
@@ -22,7 +21,7 @@ window.onload = () => {
     }
     setTimeout(()=> {
         localStorage.setItem("reload", 0)
-    },1000)
+    },100)
 }
 
 // Retrieve, process, and build sets
@@ -108,6 +107,5 @@ const ProblemsLoop = () => {
     }
     window.requestAnimationFrame(ProblemsLoop)
 }
-setTimeout(()=>{
-    window.requestAnimationFrame(ProblemsLoop)
-}, 200)
+
+window.requestAnimationFrame(ProblemsLoop)

@@ -50,9 +50,9 @@ function setProblems(set){
 
 // drawProblem(): draws problem onto given canvas
 function drawProblem(problem, index){
-    if (Id(`a-input-${index+1}`) != undefined){
-        let iCanvas = Id(`a-input-${index+1}`)
-        let oCanvas = Id(`a-output-${index+1}`)
+    if (Class('a-input')[index] != undefined){
+        let iCanvas = Class('a-input')[index]
+        let oCanvas = Class('a-output')[index]
         problem.drawInput(iCanvas)
         problem.drawOutput(oCanvas)
     }else{

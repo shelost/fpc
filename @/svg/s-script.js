@@ -211,11 +211,6 @@ Id('save').onclick = () => {
     drawProblems()
 }
 Id('upload').onclick = () =>{
-
-    addToSet()
-    uploadProblem(SET)
-
-    /*
     if (SET.problems.length < 4){
         alert('Please enter at least 4 examples.')
     }else if (SET.name.length < 1){
@@ -224,7 +219,6 @@ Id('upload').onclick = () =>{
         addToSet()
         uploadProblem(SET)
     }
-    */
 }
 Id('search').onclick = Search
 Id('file').onchange = Submit

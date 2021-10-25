@@ -65,6 +65,7 @@
 }
 
 @media screen and (max-width: 800px){
+
     #main{
         margin-top: 50px;
         display: flex;
@@ -78,33 +79,46 @@
         color: white;
         margin-bottom: 40px;
         h1{
-            font-size: 24px;
-            font-weight: 400;
-            margin: 0;
-            margin-bottom: 15px;
-        }
-        h2{
             font-size: 20px;
             font-weight: 300;
             margin: 0;
-            color: rgba(white, 0.7);
+            margin-bottom: 10px;
         }
+        h2{
+            font-size: 18px;
+            font-weight: 300;
+            margin: 0;
+            color: rgba(white, 0.5);
+        }
+    }
+
+    canvas{
+        width: 60vw;
+        height: 60vw;
+        margin: 0px;
+        border: 1px solid rgba(white, 0.2);
+        background: black;
+    }
+
+    #input{
+        display: none;
     }
 
     .buttons{
         display: flex;
         flex-direction: column;
+        margin-top: 20px;
         .button{
             color: white;
             border: 1px solid white;
             text-align: center;
             width: 80vw;
-            height: 20vw;
+            height: 15vw;
             margin: 10px;
             transition: 0.2s ease;
             h1{
-                font-size: 20px;
-                line-height: 80px;
+                font-size: 18px;
+                line-height: 15vw;
                 font-weight: 400;
                 margin: 0;
             }

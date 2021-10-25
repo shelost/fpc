@@ -60,6 +60,13 @@ for (let i=0; i<Class('color').length; i++){
     }
 }
 
+// Sortable
+var sortable = Sortable.create(Id('shelf'),{
+    animation: 150,
+    dragoverBubble: true,
+    disabled: false
+});
+
 const CreateLoop = () => {
 
     resize()

@@ -91,16 +91,26 @@
     margin-bottom: 40px;
   }
   .title h1 {
-    font-size: 24px;
-    font-weight: 400;
-    margin: 0;
-    margin-bottom: 15px;
-  }
-  .title h2 {
     font-size: 20px;
     font-weight: 300;
     margin: 0;
-    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 10px;
+  }
+  .title h2 {
+    font-size: 18px;
+    font-weight: 300;
+    margin: 0;
+    color: rgba(255, 255, 255, 0.5);
+  }
+  canvas {
+    width: 60vw;
+    height: 60vw;
+    margin: 0px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: black;
+  }
+  #input {
+    display: none;
   }
   .buttons {
     display: -webkit-box;
@@ -110,20 +120,21 @@
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
             flex-direction: column;
+    margin-top: 20px;
   }
   .buttons .button {
     color: white;
     border: 1px solid white;
     text-align: center;
     width: 80vw;
-    height: 20vw;
+    height: 15vw;
     margin: 10px;
     -webkit-transition: 0.2s ease;
     transition: 0.2s ease;
   }
   .buttons .button h1 {
-    font-size: 20px;
-    line-height: 80px;
+    font-size: 18px;
+    line-height: 15vw;
     font-weight: 400;
     margin: 0;
   }
