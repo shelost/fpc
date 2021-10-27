@@ -230,11 +230,12 @@ function fetchSVG(n){
     });
 
     setTimeout(() => {
-        let Results = []
+        var Results = []
         for (let i=0; i<res.length; i++){
             let elem = res[i]
             Results.push(string(elem) + '!')
         }
+        console.log(Results.length)
         localStorage.setItem("svg", Results)
     }, 300);
 }

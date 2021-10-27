@@ -87,7 +87,6 @@ function newID(){
 }
 
 function objectToList(list){
-    console.log(list)
     let RESULT = `[`
     for (let i=0; i<list.length; i++){
         let el = list[i]

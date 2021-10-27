@@ -34,10 +34,9 @@ function buildElem(set){
                 string += `<h1 class = 'tag' style = 'background:${tagColor(tag)}'> ${tag} </h1>`
             }
         }
-        string += `</div> <div class = 'gradient'> </div></div>`
-    }else{
-        string += `</div></div>`
     }
+
+    string += `</div> <div class = 'gradient'> </div></div>`
 
     return string
 }
@@ -86,21 +85,25 @@ function drawProblems(){
     }
 }
 
-function Search(){
+function Search(query){
+    if (query.length > 0){
+        window.location.search = 'search=' + query
+    }else{
+        window.location.search = ''
+    }
+}
+
+function Render(list){
     fetchSVG(1000)
-    let query = Id('search').value
     Sets = []
     let count = 0
-    if (query.length > 0){
-        split = query.split(' ')
+    if (list.length > 0){
         for (let j=0; j<Jsons.length; j++){
             let json = Jsons[j]
             add = false
-
-            for (let i=0; i<split.length; i++){
-                let q = split[i]
+            for (let i=0; i<list.length; i++){
+                let q = list[i]
                 if (json.name.includes(q)){
-                    Sets.push(json)
                     add = true
                 }else{
                     tags = parse(json.tags)
@@ -111,15 +114,20 @@ function Search(){
                         }
                     }
                 }
-
             }
-
             if (add){
-                Sets.push(json)
-                count++
+                let match = false
+                for (let k=0; k<Sets.length; k++){
+                    if (json.id == Sets[k].id){
+                        match = true
+                    }
+                }
+                if (!match){
+                    Sets.push(json)
+                    count++
+                }
             }
         }
-
         showResults()
     }else{
         count = Jsons.length

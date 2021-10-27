@@ -29,8 +29,6 @@ window.onload = () => {
 
 // Retrieve, process, and build sets
 
-console.log(localStorage.getItem('svg').length)
-
 if (localStorage.getItem('svg').length > 5){
     processProblems()
     showResults()
@@ -62,7 +60,9 @@ var sortable = Sortable.create(Main,{
     disabled: false
 });
 
-Id('search-btn').onclick = Search
+Id('search-btn').onclick = () => {
+    Search(Id('search').value)
+}
 
 for (let i=0; i<Class('image').length; i++){
     let c = Class('image')[i]
@@ -73,7 +73,7 @@ for (let i=0; i<Class('image').length; i++){
 window.addEventListener('keyup', (e) => {
     switch (e.key){
         case 'Enter':
-            Search()
+            Search(Id('search').value)
             break
     }
 });
@@ -92,6 +92,26 @@ function setLinks(){
     }
 }
 
+let s = window.location.search
+if (s.length > 8){
+    let q = s.substring(8, s.length).split('%20')
+    let queryList = []
+    for (let i=0; i<q.length; i++){
+        let query = q[i]
+        if (query.length > 0){
+            let str = ''
+            for (let j=0; j<query.length; j++){
+                let char = query[j]
+                if (char.match(/[a-z]/i) != null || char == '-'){
+                    str += char
+                }
+            }
+            queryList.push(str)
+        }
+    }
+    Render(queryList)
+    Id('search').value = q.join(' ')
+}
 
 const ProblemsLoop = () => {
 
@@ -118,8 +138,17 @@ const ProblemsLoop = () => {
     }
     for (let i=0; i<Class('head').length; i++){
         let el = Class('head')[i]
-        if (SHOW_NAME){ el.classList.remove('hidden')}
-        else{el.classList.add('hidden')}
+        let tags = Class('tags')[i]
+        let grad = Class('gradient')[i]
+        if (SHOW_NAME){
+            el.classList.remove('hidden')
+            tags.classList.remove('hidden')
+            grad.classList.remove('hidden')
+        }else{
+            el.classList.add('hidden')
+            tags.classList.add('hidden')
+            grad.classList.add('hidden')
+        }
     }
 
     let examples = 0, canvases = 0
