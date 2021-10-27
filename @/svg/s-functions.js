@@ -86,8 +86,8 @@ function newID(){
     console.log("ID: " + ID)
 }
 
-
 function objectToList(list){
+    console.log(list)
     let RESULT = `[`
     for (let i=0; i<list.length; i++){
         let el = list[i]
@@ -206,9 +206,30 @@ function fileToObject(str){
     el.innerHTML = str
     let s = el.getElementsByTagName('svg')[0].innerHTML
     el.innerHTML = s
-    let elems = el.getElementsByTagName('*')
+    let elements = el.getElementsByTagName('*')
+    let elems = []
+    let STYLE = {}
     var RESULT = []
-    for (let i=2; i<elems.length; i++){
+    for (let i=0; i<elements.length; i++){
+        let elem = elements[i]
+        if (elem.nodeName != 'HEAD' && elem.nodeName != 'STYLE' && elem.nodeName != 'BODY'){
+            elems.push(elem)
+        }
+        if (elem.nodeName == 'STYLE'){
+            let arr = elem.innerHTML.split(".")
+            arr.shift()
+            for (let j=0; j<arr.length; j++){
+                let css = arr[j]
+                let obj = css.substring(css.indexOf('{'),css.length).replaceAll(';', '" , "').replaceAll(':', '" : "')
+                let name = css.substring(0, css.indexOf('{'))
+                obj = '{"' + obj.substring(1, obj.length-6) + '}'
+                obj = parse(obj)
+                STYLE[name] = obj
+            }
+        }
+    }
+    console.log(STYLE)
+    for (let i=0; i<elems.length; i++){
         let elem = elems[i]
         let A = elem.attributes
         let stroke = elem.style.stroke
@@ -218,6 +239,9 @@ function fileToObject(str){
             rgb = [parse(s[0].substring(4)), parse(s[1]), parse(s[2].substring(0, s[2].length-1))]
         }else{
             rgb = stroke
+        }
+        if (A.class != undefined){
+            rgb = STYLE[A.class.value].stroke
         }
         var obj = {
             type: 'unknown',
@@ -267,7 +291,6 @@ function fileToObject(str){
                         obj.points.push([round(parse(str2[i])), round(parse(str2[i+1]))])
                     }
                 }
-                console.log(obj.points)
                 break
             case 'PATH':
                 obj.type = 'path'
@@ -554,18 +577,15 @@ function htmlToObject(){
                             }
                         }
                         obj[prop] = points
-                        console.log(points)
 
                     // Normal List
                     }else{
-                        console.log(arr)
                         let list = parse('[' + arr + ']')
                         obj[prop] = list
                     }
                 // Not list
                 }else{
                     if (!isNaN(val[0])){
-                        console.log(val)
                         val = parse(val)
                     }
                     obj[prop] =  val
