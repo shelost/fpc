@@ -1,1 +1,1 @@
-chrome_options.add_argument('--log-level=1')
+
