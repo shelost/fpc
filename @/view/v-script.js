@@ -17,16 +17,6 @@ function fullSize(){
     }
 }
 
-window.onload = () => {
-    if (localStorage.getItem("reload") == 0){
-        window.location.reload()
-        localStorage.setItem("reload", 1)
-    }
-    setTimeout(()=> {
-        localStorage.setItem("reload", 0)
-    },10)
-}
-
 // Retrieve, process, and build sets
 
 if (localStorage.getItem('svg').length > 5){
