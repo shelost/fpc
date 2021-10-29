@@ -74,9 +74,9 @@ function setLinks(){
         let id = elem.id
 
         elem.onclick = () => {
-            sessionStorage.setItem("searchID", id)
+            // sessionStorage.setItem("searchID", id)
             setTimeout(()=>{
-                window.location = '../svg'
+                window.location =  `../svg/?id=${id}`
             },200)
         }
     }

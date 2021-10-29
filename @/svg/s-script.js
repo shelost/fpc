@@ -16,8 +16,13 @@ function findMatch(id){
     fetchSVG(1000)
     processProblems()
     let s
+    if (id == undefined || id.length != 6 || isNaN(id)){
+        return false
+    }
+    id = parse(id)
     for (let i=0; i<Jsons.length; i++){
         let p = Jsons[i]
+
         if (p.id == id){
             s = p
         }
@@ -45,25 +50,31 @@ function findMatch(id){
             Id('id').innerHTML = s.id
             Id('tags').value = tags
             console.log("ID (retrieved): " + ID)
+            return true
         }else{
             alert('Invalid ID')
+            return false
         }
-    },0)
+    },100)
 }
-
-
 
 fetchSVG(1000)
 processProblems()
 
-console.log(sessionStorage.getItem('searchID'))
-if (sessionStorage.getItem('searchID') != 'null'){
-    let searchID = sessionStorage.getItem('searchID')
+if (window.location.search.length > 6){
+    let s = window.location.search
+    let searchID = s.substring(4,s.length)
     findMatch(searchID)
+    console.log(searchID)
+
     setTimeout(()=>{
         Select(0)
         drawProblems()
-    }, 0)
+    }, 100)
+}
+
+function Search(searchID){
+    window.location.search = 'id=' + searchID
 }
 
 for (let i=0; i<Tag('canvas').length; i++){
@@ -103,7 +114,6 @@ function addToSet(){
         let tag = split[i].trim()
         SET.tags.push(tag)
     }
-    //SET.tags = string(SET.tags)
 }
 
 function drawProblems(){
@@ -156,14 +166,6 @@ function Back(){
     STAGE = 0
 }
 
-function Search(){
-    let searchID = Id('searchbox').value
-    findMatch(searchID)
-    setTimeout(()=>{
-        Select(0)
-        drawProblems()
-    }, 0)
-}
 
 function Submit(){
     if (Id('file').value.length > 0){
@@ -197,9 +199,9 @@ function Message(msg){
     }, 2000)
 }
 
-// Interaction
-Id('save').onclick = () => {
+function Save(){
     let string = objectToList(Objects[SELECTED])
+    console.log(JSON.stringify(Objects[SELECTED][0]))
     Id('object').innerHTML = annotate(string.substring(1,string.length-1))
     if (Objects.length > 0){
         let html = htmlToObject()
@@ -208,11 +210,14 @@ Id('save').onclick = () => {
         }
     }
     addToSet()
+    showColors()
     drawProblems()
 }
+
+// Interaction
 Id('upload').onclick = () =>{
-    if (SET.problems.length < 4){
-        alert('Please enter at least 4 examples.')
+    if (SET.problems.length < 3){
+        alert('Please enter at least 3 examples.')
     }else if (SET.name.length < 1){
         alert('Please enter a name.')
     }else{
@@ -220,7 +225,10 @@ Id('upload').onclick = () =>{
         uploadProblem(SET)
     }
 }
-Id('search').onclick = Search
+Id('search').onclick = () => {
+    Search(Id('searchbox').value)
+}
+Id('save').onclick = Save
 Id('file').onchange = Submit
 Id('new').onclick = newID
 Id('clear').onclick = Clear
@@ -231,6 +239,17 @@ for (let i=0; i<Class('row').length; i++){
         Select(i)
     }
 }
+
+window.addEventListener('keyup', (e) => {
+    switch (e.key){
+        case 'Enter':
+            Search(Id('searchbox').value)
+            break
+        case 's':
+            Save()
+            break
+    }
+});
 
 let SVGLoop = () => {
     if (Id('name').value.length > 0){

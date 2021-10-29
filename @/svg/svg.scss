@@ -303,6 +303,10 @@
                     &.check{
                         width: 35px;
                     }
+                    &.disabled{
+                        width: 40px;
+                        color: rgba(white, 0.5);
+                    }
                 }
                 input{
                     font-size: 12px;
@@ -322,6 +326,11 @@
                         border-radius: 15px;
                         &:checked{
                             background: red;
+                        }
+                        &.disabled{
+                            &:checked{
+                                background: black;
+                            }
                         }
                     }
                     &:hover{
@@ -631,6 +640,9 @@
                     }
                     &.check{
                         width: 35px;
+                    }
+                    &.disabled{
+                        width: 40px;
                     }
                 }
                 input{

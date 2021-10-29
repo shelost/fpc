@@ -75,12 +75,14 @@ function drawProblems(){
     for (let i=0; i<Sets.length; i++){
         let s = Sets[i]
         if (s.problems.length >= 3){
+            console.log(s.name)
             for (let j=0; j<3; j++){
                 let p = s.problems[j]
                 let iCanvas = Id(`${s.id}-input-${j+1}`)
                 let oCanvas = Id(`${s.id}-output-${j+1}`)
                 drawFile(p, iCanvas, oCanvas)
             }
+        }else{
         }
     }
 }

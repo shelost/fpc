@@ -43,6 +43,8 @@ function abbrevProp(prop){
             return '1'
         case 'end':
             return '2'
+        case 'disabled':
+            return 'disable'
         case 'c':
             return 'commands'
         case 'p':
@@ -65,6 +67,10 @@ function abbrevProp(prop){
             return 'end'
         case 'rgb':
             return 'rgb'
+        case 'disable':
+            return 'disabled'
+        default:
+            return prop
     }
     return 'err'
 }
@@ -131,21 +137,25 @@ function tostr(t){
                         if (i < arr.length-1){ str += ', ' }
                     }
                     str += `]`
-                    if (prop != "rgb"){ str += ", " }
+                    if (prop != "disabled"){ str += ", " }
                 }
             }else{
-                if (isNaN(t[prop])){
+                if (isNaN(t[prop]) || typeof t[prop] == 'string'){
                     str += `"${prop}": "${t[prop]}"`
-                    if (prop != "rgb"){ str += ", " }
+                    if (prop != "disabled"){ str += ", " }
                 }else{
                     if (string(t[prop]).length > 0){
-                        str += `"${prop}": ${parse(t[prop])},`
+                        str += `"${prop}": ${parse(t[prop])}`
                     }else{
-                        str += `"${prop}": "",`
+                        str += `"${prop}": ""`
                     }
+                    if (prop != "disabled"){ str += ", " }
                 }
             }
         }
+    }
+    if (t.disabled == undefined){
+        str += `"disabled": 0`
     }
     str += '}'
     return str
@@ -227,7 +237,6 @@ function fileToObject(str){
             }
         }
     }
-    console.log(STYLE)
     for (let i=0; i<elems.length; i++){
         let elem = elems[i]
         let A = elem.attributes
@@ -245,6 +254,7 @@ function fileToObject(str){
         var obj = {
             type: 'unknown',
             stage: 0,
+            rgb: rgb
         }
         switch (elem.nodeName){
             case 'LINE':
@@ -256,7 +266,6 @@ function fileToObject(str){
                 obj.type = 'line'
                 obj.start = [x1, y1]
                 obj.end = [x2, y2]
-                obj.rgb = rgb
                 break
             case 'RECT':
                 x = round(parse(A.x.value))
@@ -267,12 +276,10 @@ function fileToObject(str){
                 obj.point = [x,y]
                 obj.width = width
                 obj.height = height
-                obj.rgb = rgb
                 break
             case 'POLYGON':
                 obj.type = 'polygon'
                 obj.points = []
-                obj.rgb = rgb
                 let str = A.points.value.split(' ')
                 for (let i=0; i<str.length; i+=2){
                     if (i < str.length-1){
@@ -283,7 +290,6 @@ function fileToObject(str){
             case 'POLYLINE':
                 obj.type = 'polyline'
                 obj.points = []
-                obj.rgb = rgb
                 let str2 = A.points.value.split(' ')
                 for (let i=0; i<str2.length; i+=2){
                     if (i < str2.length-1){
@@ -294,7 +300,6 @@ function fileToObject(str){
             case 'PATH':
                 obj.type = 'path'
                 obj.commands = []
-                obj.rgb = rgb
                 let d = A.d.value
                 let split = []
                 let prev = 0, pos = 0
@@ -336,9 +341,10 @@ function fileToObject(str){
                 obj.type = 'circle'
                 obj.center = [cx, cy]
                 obj.radius = r
-                obj.rgb = rgb
                 break
         }
+        obj.disabled = 0
+        console.log(obj)
         RESULT.push(obj)
     }
     return RESULT
@@ -381,6 +387,9 @@ function drawFile(file, iCanvas, oCanvas){
             }else{
                 ctx.strokeStyle =  `${elem.rgb}`
             }
+            if (elem.disabled == 1){
+                break
+            }
             switch (elem.type){
                 case 'line':
                     ctx.beginPath()
@@ -404,6 +413,7 @@ function drawFile(file, iCanvas, oCanvas){
                     }
                     ctx.stroke()
                     ctx.closePath()
+                    console.log(elem.points)
                     break
                 case 'polyline':
                     ctx.beginPath()
@@ -446,6 +456,9 @@ function Log(file){
     Id('object').innerHTML = annotate(string.substring(1,string.length-1))
     for (let i=0; i<file.length; i++){
         let elem = file[i]
+        if (elem.disabled == undefined){
+            elem.disabled = 0
+        }
         let s =
         `
         <div class = 'elem'>
@@ -459,34 +472,50 @@ function Log(file){
             let str = abbrevProp(prop)
             if (prop != "tostr" && prop != "type"){
                 // Default
-                let file =
-                `
-                <div class = 'prop'>
-                    <h2> ${str} </h2>
-                    <input type = 'text' id='${i}-${elem.type}-${prop}' value = '${elem[prop]}'>
-                </div>
-                `
-                // RGB
-                if (prop == 'rgb'){
-                    file = `
-                    <div class = 'prop'>
-                        <h2 class = 'rgb'> ${str} </h2>
-                        <input type = 'text' id='${i}-${elem.type}-${prop}' value = '${elem[prop]}'>
-                    </div>
-                    `
-                }
-                // Stage
-                if (prop == 'stage'){
-                    let checked = ''
-                    if (elem[prop] == 1){
-                        checked = 'checked'
-                    }
-                    file = `
-                    <div class = 'prop'>
-                        <h2 class = 'check'> ${str} </h2>
-                        <input type = 'checkbox' class = 'checkbox' id='${i}-${elem.type}-${prop}' ${checked}>
-                    </div>
-                    `
+                let file = ``
+
+                switch(prop){
+                    case 'rgb':
+                        file = `
+                        <div class = 'prop'>
+                            <h2 class = 'rgb'> ${str} </h2>
+                            <input type = 'text' id='${i}-${elem.type}-${prop}' value = '${elem[prop]}'>
+                        </div>
+                        `
+                        break
+                    case 'stage':
+                        let checked = ''
+                        if (elem[prop] == 1){
+                            checked = 'checked'
+                        }
+                        file = `
+                        <div class = 'prop'>
+                            <h2 class = 'check'> ${str} </h2>
+                            <input type = 'checkbox' class = 'checkbox' id='${i}-${elem.type}-${prop}' ${checked}>
+                        </div>
+                        `
+                        break
+                    case 'disabled':
+                        let check = ''
+                        if (elem[prop] == 1){
+                            check = 'checked'
+                        }
+                        file = `
+                        <div class = 'prop'>
+                            <h2 class = 'check disabled'> ${str} </h2>
+                            <input type = 'checkbox' class = 'checkbox disabled' id='${i}-${elem.type}-${prop}' ${check}>
+                        </div>
+                        `
+                        break
+                    default:
+                        file =
+                        `
+                        <div class = 'prop'>
+                            <h2> ${str} </h2>
+                            <input type = 'text' id='${i}-${elem.type}-${prop}' value = '${elem[prop]}'>
+                        </div>
+                        `
+                        break
                 }
                 // Array
                 if (Array.isArray(elem[prop])){
@@ -516,13 +545,21 @@ function Log(file){
 function showColors(){
     for (let i=0; i<Class('rgb').length; i++){
         let h2 = Class('rgb')[i]
+        let elem = h2.parentElement.parentElement.parentElement
         let val = h2.parentElement.children[1].value
         let div = h2.parentElement.parentElement.parentElement.firstElementChild.firstElementChild
+        let disabled = h2.parentElement.parentElement.lastElementChild.lastElementChild.checked
         if (val.indexOf(',') != -1){
             let s = val.split(',')
             div.style.border= `1px solid rgba(${s[0]},${s[1]},${s[2]}, 1)`
         }else{
             div.style.border = `1px solid ${val}`
+        }
+
+        if (disabled == 1){
+            elem.style.opacity = 0.5
+        }else{
+            elem.style.opacity = 1
         }
     }
 }
@@ -554,6 +591,10 @@ function htmlToObject(){
         let obj = {
             type: type,
         }
+        let disabled = elem.children[1].lastElementChild.lastElementChild.checked
+        if (disabled){
+            continue
+        }
         for (let j=0; j<elem.children[1].children.length; j++){
             let div = elem.children[1].children[j]
             let prop = abbrevProp(trim(div.firstElementChild.innerHTML))
@@ -568,7 +609,7 @@ function htmlToObject(){
                         let points = arr.split(' ')
                         for (let k=0; k<points.length; k++){
                             let arr = points[k]
-                            if (isNaN(arr[0])){
+                            if (isNaN(arr[0]) && arr[0] != '-'){
                                 arr = `"${points[k][0]}"` + arr.substring(1, arr.length)
                             }
                             if (arr.indexOf(',') != -1){
