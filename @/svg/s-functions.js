@@ -413,7 +413,6 @@ function drawFile(file, iCanvas, oCanvas){
                     }
                     ctx.stroke()
                     ctx.closePath()
-                    console.log(elem.points)
                     break
                 case 'polyline':
                     ctx.beginPath()

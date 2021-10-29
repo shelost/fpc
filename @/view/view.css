@@ -198,6 +198,9 @@ body {
     margin: 0;
     margin-left: 5px;
   }
+  .elem .head .slash {
+    font-weight: 400;
+  }
   .elem .head .id {
     font-size: 12px;
     font-weight: 400;

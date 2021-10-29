@@ -2,6 +2,10 @@ function buildElem(set){
 
     let s = set
 
+    let name = s.name
+
+    name = name.replaceAll('/','<span class = "slash"> / </span>')
+
     let string =
     `
     <div class = 'elem' id = ${s.id}>
@@ -155,9 +159,16 @@ function tagColor(tag){
         '#B8FFB8', // 1 - green
         '#FFF0B2', // 2 - yellow
         '#FFDDF5', // 3 - pink
-        '#E8E8FF', // 4 - indigo
+        '#EAD4FF', // 4 - indigo
     ]
     switch (tag){
+
+        case 'multi-object':
+            c = 4
+            break
+        case 'distractions':
+            c = 4
+            break
 
         case 'center-of-mass':
             c = 2
