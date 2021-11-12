@@ -219,13 +219,14 @@ function fileToObject(str){
     let elems = []
     let STYLE = {}
     var RESULT = []
+
     for (let i=0; i<elements.length; i++){
         let elem = elements[i]
         if (elem.nodeName != 'HEAD' && elem.nodeName != 'STYLE' && elem.nodeName != 'BODY'){
             elems.push(elem)
         }
         if (elem.nodeName == 'STYLE'){
-            let arr = elem.innerHTML.split(".")
+            let arr = elem.innerHTML.split(".st")
             arr.shift()
             for (let j=0; j<arr.length; j++){
                 let css = arr[j]
@@ -233,7 +234,7 @@ function fileToObject(str){
                 let name = css.substring(0, css.indexOf('{'))
                 obj = '{"' + obj.substring(1, obj.length-6) + '}'
                 obj = parse(obj)
-                STYLE[name] = obj
+                STYLE['st' + name] = obj
             }
         }
     }
@@ -281,9 +282,10 @@ function fileToObject(str){
                 obj.type = 'polygon'
                 obj.points = []
                 let str = A.points.value.split(' ')
-                for (let i=0; i<str.length; i+=2){
+                for (let i=0; i<str.length; i++){
                     if (i < str.length-1){
-                        obj.points.push([round(parse(str[i])), round(parse(str[i+1]))])
+                        pair = str[i].split(',')
+                        obj.points.push([round(parse(pair[0])), round(parse(pair[1]))])
                     }
                 }
                 break
@@ -291,9 +293,10 @@ function fileToObject(str){
                 obj.type = 'polyline'
                 obj.points = []
                 let str2 = A.points.value.split(' ')
-                for (let i=0; i<str2.length; i+=2){
+                for (let i=0; i<str2.length; i++){
                     if (i < str2.length-1){
-                        obj.points.push([round(parse(str2[i])), round(parse(str2[i+1]))])
+                        pair = str2[i].split(',')
+                        obj.points.push([round(parse(pair[0])), round(parse(pair[1]))])
                     }
                 }
                 break
@@ -411,6 +414,7 @@ function drawFile(file, iCanvas, oCanvas){
                             ctx.lineTo(p[0], p[1])
                         }
                     }
+                    ctx.lineTo(elem.points[0][0], elem.points[0][1])
                     ctx.stroke()
                     ctx.closePath()
                     break
